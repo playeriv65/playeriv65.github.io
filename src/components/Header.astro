@@ -1,36 +1,40 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import LanguagePicker from "./LanguagePicker.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const navItems = [
-  { name: 'Mac', href: '#' },
-  { name: 'iPad', href: '#' },
-  { name: 'iPhone', href: '#' },
-  { name: 'Watch', href: '#' },
-  { name: 'Vision', href: '#' },
-  { name: 'AirPods', href: '#' },
-  { name: 'TV & Home', href: '#' },
+  { name: t("nav.home"), href: lang === "en" ? "/" : `/${lang}/` },
+  { name: t("nav.projects"), href: "#projects" },
+  { name: t("nav.about"), href: "#about" },
 ];
 ---
 
 <header class="global-nav glass animate-fade-in-up">
   <div class="nav-content mx-auto">
     <a href="/" class="nav-logo" aria-label="Home">
-      <!-- Apple Logo Placeholder (Replace with actual SVG later) -->
-      <svg height="44" viewBox="0 0 14 44" width="14" xmlns="http://www.w3.org/2000/svg">
-        <path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.692 2.5924.692.6506 0 1.6111-.7953 2.8093-.7953.6611 0 1.9211.0516 3.1604 1.6418zm-2.9023-3.6146a3.8373 3.8373 0 0 0 .8676-2.7576 3.8055 3.8055 0 0 0 -2.5718 1.3427 3.5011 3.5011 0 0 0 -.8985 2.6543 2.9723 2.9723 0 0 0 2.6027-1.2394z" fill="currentColor"></path>
-      </svg>
+      <!-- Text Logo -->
+      <span
+        style="font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em;"
+        >playeriv65</span
+      >
     </a>
-    
+
     <nav class="nav-links">
       <ul class="nav-list">
-        {navItems.map(item => (
-          <li class="nav-item">
-            <a href={item.href} class="nav-link">{item.name}</a>
-          </li>
-        ))}
-        <!-- Support Search Icon -->
+        {
+          navItems.map((item) => (
+            <li class="nav-item">
+              <a href={item.href} class="nav-link">
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
         <li class="nav-item">
-            <a href="#" class="nav-link" aria-label="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="44" viewBox="0 0 15 44"><path d="M14.298,27.202l-3.87-3.87c0.701-0.929,1.122-2.081,1.122-3.332c0-3.06-2.489-5.55-5.55-5.55c-3.06,0-5.55,2.49-5.55,5.55 c0,3.061,2.49,5.55,5.55,5.55c1.251,0,2.403-0.421,3.332-1.122l3.87,3.87c0.151,0.151,0.35,0.228,0.548,0.228 s0.396-0.076,0.548-0.228C14.601,27.995,14.601,27.505,14.298,27.202z M1.55,20c0-2.454,1.997-4.45,4.45-4.45 c2.454,0,4.45,1.997,4.45,4.45S8.454,24.45,6,24.45C3.546,24.45,1.55,22.454,1.55,20z" fill="currentColor"></path></svg>
-            </a>
+          <LanguagePicker />
         </li>
       </ul>
     </nav>
@@ -63,7 +67,7 @@ const navItems = [
     color: var(--color-text);
     opacity: 0.8;
   }
-  
+
   .nav-logo:hover {
     opacity: 1;
   }
@@ -99,7 +103,7 @@ const navItems = [
 
   @media (max-width: 833px) {
     .nav-links {
-        display: none; /* Hide on mobile to emulate Apple's collapsed menu */
+      display: none; /* Hide on mobile to emulate Apple's collapsed menu */
     }
   }
 </style>

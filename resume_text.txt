@@ -1,0 +1,40 @@
+Zelin Li
+♂phone-alt(763) 461-4190/envel⌢pezelin.li2025@outlook.com/linkedin-inlinkedin.com/in/zelin-li-65a461355/githubgithub.com/playeriv65
+Education
+University of Minnesota, Computer Science Sept 2025 – May 2027
+•GPA: 4.0/4.0,Available for work: May 15, 2026 - Sept 1, 2026
+Beijing University of Posts and Telecommunications (BUPT), Artificial Intelligence Sept 2023 – June 2025
+•GPA: 3.85/4.0,Rank: 1/180
+Awards & Honors
+International Collegiate Programming Contest(ICPC)Asia Regional Contest -Silver Medal(84/399) Nov 2024
+•Independentlysolved a high-difficulty Problem G andled the teamto solve Problem Bat the last minute
+National Olympiad in Informatics in Provinces(NOIP)-First PrizeNov 2021
+Chinese Ministry of EducationNational Scholarship(5/470) Sept 2024
+Research Experience
+Muse Benchmark & EasyLocomo FrameworkNov 2025 – Present
+•Co-authored"Muse"(ICML 2026 sub.); optimized synthetic data pipelines and conducted literature reviews
+•Engineered"EasyLocomo"by unifying 5 model interfaces (e.g., OpenAI, Anthropic) into a single API wrapper;
+Slashed dependency overhead by95%(from 200+ to <15 packages), improving reproducibility
+•Benchmarked SOTA agents(MemAgent, HippoRAG, Kimi-Linear)across1,300+long-horizon interaction events
+•Stack:Python, PyTorch, LLMs, OpenAI — github.com/playeriv65/EasyLocomo /external-link-alt
+Projects
+Offline-First Collaboration System (Architecture Evolution)Dec 2025 – Present
+•Migrated MVP (FastAPI + Vanilla JS + SQLite) toSpring Boot + React + PostgreSQLfor maintainability and reuse
+•Built cross-archCI/CDwith GitHub Actions and Docker (x86 Maven build + QEMU image assembly) for ARM64 deploys
+•Designed anIndexedDBSync Manager with queue replay andUUID7ordering for offline conflict resolution
+•Stack:Java, Spring Boot, React, PostgreSQL, IndexedDB, CI/CD, Docker — github.com/playeriv65/todo /external-link-alt
+ACG: Auto-Chronicle Gaokao (State-Machine Narrative Engine)Jan 2026 – Present
+•Built a120-weeknarrative state machine for Gaokao progression across rank, stress, fatigue, skills, and events
+•Designed a3-stagepipeline (simulation→weekly scripts→chapters) for causal consistency and1M+chars
+•Built amulti-agentclassroom framework with per-student traits, goals, and strategy updates
+•Stack:Python, LLM APIs, Agent Architecture — github.com/playeriv65/ACG–Auto-Chronicle-Gaokao /external-link-alt
+Fall Detection System Sept 2024 – June 2025
+•Optimized aYOLO-baseddetection algorithm, boosting accuracy from42% to 88%
+•Architected real-time surveillance processing forHIKstreams usingOpenCVwithSQLitelogging
+•Refactored 80% of legacy logic into a modular codebase with strictGitversion control
+•Stack:YOLO, Git, Python, SQLite, OpenCV — github.com/playeriv65/Monitor /external-link-alt
+Skills
+Programming Languages:Python, Java, C++, JavaScript, SQL, HTML/CSS
+AI & Research:LLM APIs, Agent Architecture, PyTorch, TensorFlow, RAG, LangChain, OpenCV
+Backend & Data:Spring Boot, FastAPI, SQLAlchemy, RESTful API, PostgreSQL, SQLite
+Frontend & DevOps:React, IndexedDB, Git, GitHub Actions, CI/CD, Docker, Maven, QEMU, Oracle Cloud

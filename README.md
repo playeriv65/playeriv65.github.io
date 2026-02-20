@@ -1,43 +1,26 @@
-# Astro Starter Kit: Minimal
+# Zelin Li | Personal Website
 
-```sh
-npm create astro@latest -- --template minimal
+This is the repository for my personal website, built with [Astro](https://astro.build).
+
+## Overview
+
+- **Minimalist Design**: Inspired by Apple's clean, high-contrast aesthetics.
+- **Bilingual Support**: Native English and Chinese (i18n) routing without heavy client-side plugins.
+- **Performance First**: Zero unnecessary client-side JavaScript, leveraging Astro's static site generation.
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deployment
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This website is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.

@@ -1,43 +1,79 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
 const currentYear = new Date().getFullYear();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="global-footer">
   <div class="footer-content mx-auto">
     <div class="footer-divider"></div>
-    
+
     <div class="footer-main">
       <div class="footer-branding">
-        <h2 class="footer-title">Playeriv65</h2>
+        <h2 class="footer-title">playeriv65</h2>
         <p class="footer-subtitle">Design. Code. Create.</p>
       </div>
-      
+
       <div class="footer-links">
         <div class="link-column relative">
-          <h3 class="column-title">Connect</h3>
+          <h3 class="column-title">{t("footer.connect")}</h3>
           <ul>
-            <li><a href="https://github.com/playeriv65" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
+            <li>
+              <a
+                href="https://github.com/playeriv65"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/zelin-li-65a461355"
+                target="_blank"
+                rel="noopener noreferrer">LinkedIn</a
+              >
+            </li>
+            <li><a href="mailto:zelin.li2025@outlook.com">Email</a></li>
           </ul>
         </div>
         <div class="link-column">
-          <h3 class="column-title">Projects</h3>
+          <h3 class="column-title">{t("footer.projects")}</h3>
           <ul>
-            <li><a href="#">Open Source</a></li>
-            <li><a href="#">Web Apps</a></li>
-            <li><a href="#">Experiments</a></li>
+            <li>
+              <a
+                href="https://github.com/playeriv65/todo"
+                target="_blank"
+                rel="noopener noreferrer">Offline-First Todo</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/playeriv65/ACG--Auto-Chronicle-Gaokao"
+                target="_blank"
+                rel="noopener noreferrer">ACG Engine</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/playeriv65/EasyLocomo"
+                target="_blank"
+                rel="noopener noreferrer">EasyLocomo</a
+              >
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    
+
     <div class="footer-legal">
-      <div class="copyright">Copyright © {currentYear} Zelin Li. All rights reserved.</div>
+      <div class="copyright">
+        {t("footer.legal.copyright")}
+      </div>
       <div class="legal-links">
-        <a href="#">Privacy Policy</a>
+        <a href="#">{t("footer.legal.privacy")}</a>
         <span class="separator">|</span>
-        <a href="#">Terms of Use</a>
+        <a href="#">{t("footer.legal.terms")}</a>
       </div>
     </div>
   </div>
@@ -136,7 +172,7 @@ const currentYear = new Date().getFullYear();
       flex-direction: column;
       gap: 40px;
     }
-    
+
     .footer-links {
       flex-direction: column;
       gap: 30px;
