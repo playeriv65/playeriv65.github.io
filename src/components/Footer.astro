@@ -1,0 +1,151 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="global-footer">
+  <div class="footer-content mx-auto">
+    <div class="footer-divider"></div>
+    
+    <div class="footer-main">
+      <div class="footer-branding">
+        <h2 class="footer-title">Playeriv65</h2>
+        <p class="footer-subtitle">Design. Code. Create.</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="link-column relative">
+          <h3 class="column-title">Connect</h3>
+          <ul>
+            <li><a href="https://github.com/playeriv65" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+        <div class="link-column">
+          <h3 class="column-title">Projects</h3>
+          <ul>
+            <li><a href="#">Open Source</a></li>
+            <li><a href="#">Web Apps</a></li>
+            <li><a href="#">Experiments</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-legal">
+      <div class="copyright">Copyright © {currentYear} Zelin Li. All rights reserved.</div>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .global-footer {
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    line-height: 1.33337;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: 0 22px;
+    padding-bottom: 21px;
+    margin-top: 100px;
+  }
+
+  .footer-content {
+    max-width: 980px;
+  }
+
+  .footer-divider {
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 20px;
+  }
+
+  .footer-main {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+  }
+
+  .footer-title {
+    color: var(--color-text);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: -0.015em;
+  }
+
+  .footer-subtitle {
+    font-size: 14px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 80px;
+  }
+
+  .column-title {
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  a {
+    color: var(--color-text-muted);
+  }
+
+  a:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+
+  .footer-legal {
+    border-top: 1px solid var(--glass-border);
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .legal-links {
+    display: flex;
+    align-items: center;
+  }
+
+  .separator {
+    margin: 0 10px;
+  }
+
+  @media (max-width: 833px) {
+    .footer-main {
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    .footer-links {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .footer-legal {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
