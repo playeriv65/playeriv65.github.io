@@ -1,0 +1,338 @@
+---
+import { getCollection } from "astro:content";
+import { useTranslations } from "../i18n/utils";
+import { Image } from "astro:assets";
+
+export interface Props {
+    lang: "en" | "zh";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Fetch and sort events by date descending
+const allTimelineEvents = await getCollection("timeline");
+const sortedEvents = allTimelineEvents.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<section id="timeline" class="timeline-section">
+    <div class="timeline-container mx-auto">
+        <div class="timeline-header">
+            <h2 class="section-title animate-fade-in-up">
+                {t("timeline.headline")}
+            </h2>
+            <p class="section-subtitle animate-fade-in-up delay-100">
+                {t("timeline.subheadline")}
+            </p>
+        </div>
+
+        <div class="timeline-body">
+            <!-- The Glow Track -->
+            <div class="timeline-track">
+                <div class="timeline-progress" id="timeline-progress"></div>
+            </div>
+
+            <div class="timeline-events">
+                {
+                    sortedEvents.map((event, index) => {
+                        const title =
+                            lang === "en"
+                                ? event.data.title_en
+                                : event.data.title_zh;
+                        const desc =
+                            lang === "en"
+                                ? event.data.description_en
+                                : event.data.description_zh;
+                        const imageInput = event.data.image;
+
+                        return (
+                            <div class="timeline-item animate-on-scroll">
+                                <div class="timeline-node">
+                                    <span class="node-year">
+                                        {event.data.year}
+                                    </span>
+                                </div>
+
+                                <div class="timeline-content">
+                                    <h3 class="timeline-title">{title}</h3>
+                                    <p class="timeline-desc">{desc}</p>
+
+                                    {imageInput && (
+                                        <div class="timeline-image-wrapper test">
+                                            <Image
+                                                src={imageInput}
+                                                alt={title}
+                                                width={600}
+                                                class="timeline-image"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .timeline-section {
+        padding: 120px 22px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .timeline-container {
+        max-width: 980px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .timeline-header {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+
+    .timeline-body {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 40px;
+    }
+
+    /* Track Base */
+    .timeline-track {
+        position: absolute;
+        left: 36px;
+        top: 0;
+        bottom: 0;
+        width: 1px; /* Thinner, more Apple-like */
+        background: rgba(255, 255, 255, 0.08); /* Slightly more visible base */
+        border-radius: 2px;
+        z-index: 0;
+    }
+
+    /* Track Glowing Progress */
+    .timeline-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            180deg,
+            var(--color-primary) 0%,
+            #7bc1ff calc(100% - 5px),
+            /* Keep solid until the very last 5px boundary */
+            rgba(123, 193, 255, 0) 100% /* Exact 5px fade for micro-softening */
+        );
+        box-shadow: 0 0 10px rgba(41, 151, 255, 0.6);
+        transform-origin: top;
+        transform: scaleY(0);
+        will-change: transform;
+        border-radius: 2px;
+        transition: transform 0.1s linear;
+    }
+
+    .timeline-events {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .timeline-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding-left: 80px;
+    }
+
+    /* Animation initial states */
+    .timeline-item.animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+        transition:
+            opacity 0.8s var(--ease-apple),
+            transform 0.8s var(--ease-apple);
+    }
+    .timeline-item.animate-on-scroll.appear {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Node Dot */
+    .timeline-node {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 18px; /* Offset to center dot on line */
+        z-index: 20;
+    }
+
+    .node-year {
+        position: absolute;
+        left: -90px; /* Shift further left for larger text */
+        width: 70px;
+        text-align: right;
+        font-family: var(--font-mono);
+        font-size: 18px; /* Larger font */
+        font-weight: 600; /* Bolder */
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.4);
+        transition: all 0.5s var(--ease-apple);
+        top: -4px; /* Align vertically with the top of the card/intersection */
+    }
+
+    /* Activated Year */
+    .timeline-item.active .node-year {
+        color: #fff;
+        transform: scale(1.1) translateX(-4px); /* Typographic pop */
+        text-shadow: 0 0 16px rgba(41, 151, 255, 0.6); /* Glow on text instead of dot */
+    }
+
+    /* Content Area */
+    .timeline-content {
+        background: var(--card-bg);
+        padding: 32px;
+        /* Apple Squircle masking fallback */
+        border-radius: 20px;
+        -webkit-mask-box-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
+            100 stretch;
+        -webkit-mask-box-image-width: 20px;
+        mask-border: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
+            100 fill stretch;
+        mask-border-width: 20px;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        border: none;
+    }
+
+    .timeline-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: var(--color-text);
+        letter-spacing: -0.015em;
+    }
+
+    .timeline-desc {
+        font-size: 15px;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .timeline-image-wrapper {
+        margin-top: 24px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #000;
+        /* Force GPU scaling to remove tearing on hover */
+        transform: translateZ(0);
+    }
+
+    .timeline-image {
+        display: block; /* Removes the bottom gap */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        opacity: 0.85;
+        transition:
+            transform 0.6s var(--ease-apple),
+            opacity 0.6s ease;
+    }
+
+    .timeline-content:hover .timeline-image {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 833px) {
+        .timeline-body {
+            padding-left: 20px; /* Make room for line on mobile */
+        }
+        .node-year {
+            position: relative;
+            left: 0;
+            text-align: left;
+            margin-bottom: 4px;
+            padding-left: 80px;
+            display: block;
+            width: 100%;
+        }
+        .timeline-node {
+            position: relative;
+            width: 100%;
+            height: 0;
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    // Component Client-Side Script
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".timeline-track");
+        const progress = document.getElementById("timeline-progress");
+        const items = document.querySelectorAll(".timeline-item");
+
+        if (!track || !progress) return;
+
+        const updateTimeline = () => {
+            const trackRect = track.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // Calculate progress based on scroll position relative to the track
+            // Trigger line when track enters upper half of screen
+            let scrollY = viewportHeight / 1.5 - trackRect.top;
+
+            if (scrollY < 0) scrollY = 0;
+            if (scrollY > trackRect.height) scrollY = trackRect.height;
+
+            const scaleAmount = scrollY / trackRect.height;
+            progress.style.transform = `scaleY(${scaleAmount})`;
+
+            // Offset the dot trigger slightly relative to the line tip
+            // The line progresses down by scaleY, so its visual 'tip' is at scrollY.
+            // We set the dot trigger exactly where the line tip reaches.
+            items.forEach((item) => {
+                const itemRect = item.getBoundingClientRect();
+                const dotTrigger = viewportHeight / 1.5;
+
+                // Fire the node animation precisely when the laser line touches it
+                const isTriggered = itemRect.top < dotTrigger + 30;
+                if (isTriggered) {
+                    item.classList.add("active");
+                    item.classList.add("appear");
+                } else {
+                    item.classList.remove("active");
+                }
+            });
+        };
+
+        // Scroll listener using rAF for perfect smooth performance
+        let ticking = false;
+        window.addEventListener("scroll", () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateTimeline();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Initial check
+        updateTimeline();
+    });
+</script>
