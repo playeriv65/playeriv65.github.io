@@ -278,7 +278,16 @@ const t = useTranslations(lang);
 
     .bento-card {
         background-color: var(--card-bg);
-        border-radius: 28px;
+        border-radius: 28px; /* Fallback for unsupported browsers */
+
+        /* Apple Squircle Continuous Curvature - Cross-Browser Masking */
+        -webkit-mask-box-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='202' height='202'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
+            100 stretch;
+        -webkit-mask-box-image-width: 28px;
+        mask-border: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='202' height='202'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
+            100 fill stretch;
+        mask-border-width: 28px;
+
         height: 450px;
         padding: 40px;
         display: flex;
@@ -289,7 +298,8 @@ const t = useTranslations(lang);
         transition:
             transform 0.3s var(--ease-apple),
             background-color 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.03);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        border: none;
     }
 
     .bento-card:hover {
