@@ -10,6 +10,7 @@ export const ui = {
         'nav.home': 'Home',
         'nav.projects': 'Projects',
         'nav.about': 'About',
+        'nav.timeline': 'Journey',
 
         'hero.title': 'Zelin Li.',
         'hero.subtitle': 'Engineering systems. Crafting experiences.',
@@ -25,6 +26,9 @@ export const ui = {
         'intro.body.4': ', developing ',
         'intro.body.ai': 'LLM Agents',
         'intro.body.5': ', and creating products with exceptional user experiences. Currently seeking Software Development Engineering Internships for 2026.',
+
+        'timeline.headline': 'Journey.',
+        'timeline.subheadline': 'The milestones that shape the path.',
 
         'projects.headline': 'Selected Projects.',
         'projects.subheadline': 'A look at some of my recent technical deep dives.',
@@ -61,6 +65,7 @@ export const ui = {
         'nav.home': '首页',
         'nav.projects': '项目',
         'nav.about': '关于',
+        'nav.timeline': '时光',
 
         'hero.title': '李泽林。',
         'hero.subtitle': '构建系统架构，淬炼用户体验。',
@@ -76,6 +81,9 @@ export const ui = {
         'intro.body.4': '、开发',
         'intro.body.ai': '大模型 (LLM) 智能体',
         'intro.body.5': '，以及打造拥有极致交互体验的产品。目前正在寻找 2026 年的软件开发实习机会。',
+
+        'timeline.headline': '时光足迹。',
+        'timeline.subheadline': '记录每一个意义非凡的瞬间。',
 
         'projects.headline': '精选项目。',
         'projects.subheadline': '近期技术深度探索的部分成果展示。',

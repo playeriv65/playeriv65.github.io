@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Timeline from "./Timeline.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -47,6 +48,9 @@ const t = useTranslations(lang);
             </p>
         </div>
     </section>
+
+    <!-- Timeline / Journey Section -->
+    <Timeline lang={lang} />
 
     <!-- Projects Grid -->
     <section id="projects" class="projects-section">
