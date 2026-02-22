@@ -6,9 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "admin": "concurrently \"npm run dev\" \"node cms/server/server.js\" \"npm run dev --prefix cms/client\""
   },
   "dependencies": {
     "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

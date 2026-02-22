@@ -282,16 +282,8 @@ const t = useTranslations(lang);
 
     .bento-card {
         background-color: var(--card-bg);
-        border-radius: 28px; /* Fallback for unsupported browsers */
-
-        /* Apple Squircle Continuous Curvature - Cross-Browser Masking */
-        -webkit-mask-box-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='202' height='202'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
-            100 stretch;
-        -webkit-mask-box-image-width: 28px;
-        mask-border: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='202' height='202'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
-            100 fill stretch;
-        mask-border-width: 28px;
-
+        border-radius: var(--radius-card);
+        corner-shape: squircle; /* Premium Apple-style continuous curvature */
         height: 450px;
         padding: 40px;
         display: flex;

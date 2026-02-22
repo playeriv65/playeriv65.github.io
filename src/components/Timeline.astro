@@ -110,9 +110,9 @@ const sortedEvents = allTimelineEvents.sort(
         left: 36px;
         top: 0;
         bottom: 0;
-        width: 1px; /* Thinner, more Apple-like */
-        background: rgba(255, 255, 255, 0.08); /* Slightly more visible base */
-        border-radius: 2px;
+        width: 2px; /* Increased to 2px for better visibility */
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
         z-index: 0;
     }
 
@@ -122,20 +122,17 @@ const sortedEvents = allTimelineEvents.sort(
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 0px; /* Animate height directly to prevent gradient stretch on scaling */
         background: linear-gradient(
             180deg,
             var(--color-primary) 0%,
             #7bc1ff calc(100% - 5px),
-            /* Keep solid until the very last 5px boundary */
-            rgba(123, 193, 255, 0) 100% /* Exact 5px fade for micro-softening */
+            rgba(123, 193, 255, 0) 100%
         );
-        box-shadow: 0 0 10px rgba(41, 151, 255, 0.6);
-        transform-origin: top;
-        transform: scaleY(0);
-        will-change: transform;
-        border-radius: 2px;
-        transition: transform 0.1s linear;
+        box-shadow: 0 0 12px rgba(41, 151, 255, 0.7); /* Slightly stronger glow */
+        border-radius: 4px;
+        /* Using height transition is fast enough for single absolute elements */
+        transition: height 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     .timeline-events {
@@ -204,14 +201,8 @@ const sortedEvents = allTimelineEvents.sort(
     .timeline-content {
         background: var(--card-bg);
         padding: 32px;
-        /* Apple Squircle masking fallback */
-        border-radius: 20px;
-        -webkit-mask-box-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
-            100 stretch;
-        -webkit-mask-box-image-width: 20px;
-        mask-border: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M0,100 C0,22.4 22.4,0 100,0 L102,0 C179.6,0 202,22.4 202,100 L202,102 C202,179.6 179.6,202 102,202 L100,202 C22.4,202 0,179.6 0,102 Z' fill='black'/%3E%3C/svg%3E")
-            100 fill stretch;
-        mask-border-width: 20px;
+        border-radius: var(--radius-card);
+        corner-shape: squircle; /* Native Apple-style continuous curvature */
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         border: none;
     }
@@ -288,51 +279,61 @@ const sortedEvents = allTimelineEvents.sort(
 
         if (!track || !progress) return;
 
-        const updateTimeline = () => {
+        // Better trigger point: 80% of viewport height (more visible)
+        const getTriggerPoint = () => window.innerHeight * 0.8;
+
+        const updateTimelineHeight = () => {
             const trackRect = track.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
+            const triggerPoint = getTriggerPoint();
+            const trackTop = trackRect.top;
 
-            // Calculate progress based on scroll position relative to the track
-            // Trigger line when track enters upper half of screen
-            let scrollY = viewportHeight / 1.5 - trackRect.top;
+            // Calculate progress: how much of the track is above our trigger point
+            let absoluteProgress = triggerPoint - trackTop;
 
-            if (scrollY < 0) scrollY = 0;
-            if (scrollY > trackRect.height) scrollY = trackRect.height;
+            if (absoluteProgress < 0) absoluteProgress = 0;
+            if (absoluteProgress > trackRect.height)
+                absoluteProgress = trackRect.height;
 
-            const scaleAmount = scrollY / trackRect.height;
-            progress.style.transform = `scaleY(${scaleAmount})`;
+            progress.style.height = `${absoluteProgress}px`;
+        };
 
-            // Offset the dot trigger slightly relative to the line tip
-            // The line progresses down by scaleY, so its visual 'tip' is at scrollY.
-            // We set the dot trigger exactly where the line tip reaches.
+        // Refined 'appear' & 'active' triggers inside scroll for precise syncing
+        const updateActiveStates = () => {
+            const triggerPoint = getTriggerPoint();
             items.forEach((item) => {
-                const itemRect = item.getBoundingClientRect();
-                const dotTrigger = viewportHeight / 1.5;
+                const rect = item.getBoundingClientRect();
 
-                // Fire the node animation precisely when the laser line touches it
-                const isTriggered = itemRect.top < dotTrigger + 30;
-                if (isTriggered) {
-                    item.classList.add("active");
+                // Add appear class early so it fades in smoothly
+                if (rect.top < triggerPoint + 150) {
                     item.classList.add("appear");
+                }
+
+                // Add active class right when the laser line touches it
+                if (rect.top < triggerPoint + 30) {
+                    item.classList.add("active");
                 } else {
                     item.classList.remove("active");
                 }
             });
         };
 
-        // Scroll listener using rAF for perfect smooth performance
         let ticking = false;
-        window.addEventListener("scroll", () => {
+        const handleScroll = () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    updateTimeline();
+                    updateTimelineHeight();
+                    updateActiveStates();
                     ticking = false;
                 });
                 ticking = true;
             }
-        });
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("resize", handleScroll, { passive: true });
 
         // Initial check
-        updateTimeline();
+        updateTimelineHeight();
+        updateActiveStates();
     });
 </script>

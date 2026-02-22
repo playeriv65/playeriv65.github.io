@@ -10,6 +10,10 @@
   --glass-border: rgba(255, 255, 255, 0.1);
   --card-bg: #1d1d1f;
   
+  /* Squircles & Radii */
+  --radius-card: 50px;
+  --radius-btn: 999px;
+  
   /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -88,7 +92,8 @@ a:hover {
 .btn {
   display: inline-block;
   padding: 12px 24px;
-  border-radius: 980px; /* Apple pill shape */
+  border-radius: var(--radius-btn);
+  corner-shape: squircle;
   font-size: 17px;
   font-weight: 400;
   text-align: center;
