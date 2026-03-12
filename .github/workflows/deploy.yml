@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages & playeriv65.com
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         with:
           path: ./dist
 
-  deploy:
+  deploy-github-pages:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -40,3 +40,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-playeriv65:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to playeriv65.com via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /var/www/playeriv65.github.io
+            git pull origin main
+            npm install
+            npm run build
+            echo "Deployment completed at $(date)"
