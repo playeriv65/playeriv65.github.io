@@ -23,4 +23,6 @@ npm run build
 
 ## Deployment
 
-This website is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.
+This website is automatically deployed to:
+- **GitHub Pages** via GitHub Actions on every push to the `main` branch
+- **playeriv65.com** via SSH deployment to VPS server
