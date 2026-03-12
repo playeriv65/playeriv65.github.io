@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import { useTranslations } from "../../../i18n/utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title_zh, description_zh, pubDate } = post.data;
+const { Content } = await post.render();
+const t = useTranslations("zh");
+---
+
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description_zh} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#000000" />
+        <title>{title_zh} | Blog</title>
+        
+        <!-- Critical CSS for blog post page: prevent flash -->
+        <style>
+            .blog-post-header, .blog-content, .blog-back-link { opacity: 0; }
+            .blog-post-header.appear, .blog-content.appear, .blog-back-link.appear {
+                opacity: 1 !important;
+                transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="blog-main">
+            <article class="blog-article mx-auto">
+                <header class="blog-post-header appear">
+                    <h1>{title_zh}</h1>
+                    <p class="blog-post-meta">发表于 {pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </header>
+                <div class="blog-content appear" style="transition-delay: 100ms;">
+                    <Content />
+                </div>
+                <a href="/zh/blog/" class="blog-back-link appear" style="transition-delay: 200ms;">← {t("blog.back_to_list")}</a>
+            </article>
+        </main>
+
+        <style>
+            .blog-main { padding-top: 44px; min-height: 100vh; }
+            .blog-article { max-width: 800px; padding: 60px 22px; }
+            .blog-post-header { margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--glass-border); }
+            .blog-post-header h1 { font-size: clamp(40px, 6vw, 56px); font-weight: 600; margin-bottom: 16px; }
+            .blog-post-meta { font-size: 14px; color: var(--color-text-muted); }
+            .blog-content { font-size: 18px; line-height: 1.7; }
+            .blog-content :global(h2) { font-size: 32px; font-weight: 600; margin-top: 48px; margin-bottom: 16px; }
+            .blog-content :global(p) { margin-bottom: 24px; }
+            .blog-content :global(ul), .blog-content :global(ol) { margin-bottom: 24px; padding-left: 24px; }
+            .blog-content :global(li) { margin-bottom: 12px; }
+            .blog-content :global(a) { color: var(--color-primary); text-decoration: underline; }
+            .blog-back-link { display: inline-block; margin-top: 48px; color: var(--color-primary); font-weight: 500; transition: opacity 0.3s var(--ease-apple); }
+            .blog-back-link:hover { opacity: 0.8; }
+        </style>
+    </body>
+</html>

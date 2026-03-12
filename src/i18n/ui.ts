@@ -11,6 +11,7 @@ export const ui = {
         'nav.projects': 'Projects',
         'nav.about': 'About',
         'nav.timeline': 'Journey',
+        'nav.blog': 'Blog',
 
         'hero.title': 'Zelin Li.',
         'hero.subtitle': 'Engineering systems. Crafting experiences.',
@@ -19,7 +20,7 @@ export const ui = {
 
         'intro.headline': 'Software Developer & AI Researcher.',
         'intro.body.1': 'Based at the ',
-        'intro.body.university': 'University of Minnesota (M.S. in Computer Science)',
+        'intro.body.university': 'University of Minnesota',
         'intro.body.2': '.',
         'intro.body.3': 'Passionate about building highly-scalable ',
         'intro.body.systems': 'Systems',
@@ -29,6 +30,9 @@ export const ui = {
 
         'timeline.headline': 'Journey.',
         'timeline.subheadline': 'The milestones that shape the path.',
+
+        'blog.headline': 'Thoughts & Writings.',
+        'blog.subheadline': 'Ideas on technology, systems, and creation.',
 
         'projects.headline': 'Selected Projects.',
         'projects.subheadline': 'A look at some of my recent technical deep dives.',
@@ -53,6 +57,10 @@ export const ui = {
         'project.4.desc': 'Optimized a YOLO-based detection algorithm, boosting accuracy from 42% to 88%. Architected a real-time surveillance processing pipeline for HIK streams using OpenCV, complete with SQLite logging and a modular tracking logic.',
         'project.4.link': 'View on GitHub >',
 
+        'blog.read_more': 'Read More →',
+        'blog.published_on': 'Published on',
+        'blog.back_to_list': 'Back to Blog',
+
         'footer.branding.title': 'playeriv65',
         'footer.branding.subtitle': 'Design. Code. Create.',
         'footer.connect': 'Connect',
@@ -66,6 +74,7 @@ export const ui = {
         'nav.projects': '项目',
         'nav.about': '关于',
         'nav.timeline': '时光',
+        'nav.blog': '博客',
 
         'hero.title': '李泽林。',
         'hero.subtitle': '构建系统架构，淬炼用户体验。',
@@ -74,7 +83,7 @@ export const ui = {
 
         'intro.headline': '软件开发工程师 & AI 研究员。',
         'intro.body.1': '现就读于',
-        'intro.body.university': '明尼苏达大学 (计算机科学硕士)',
+        'intro.body.university': '明尼苏达大学',
         'intro.body.2': '。',
         'intro.body.3': '热衷于构建高可用的',
         'intro.body.systems': '后端系统',
@@ -84,6 +93,9 @@ export const ui = {
 
         'timeline.headline': '时光足迹。',
         'timeline.subheadline': '记录每一个意义非凡的瞬间。',
+
+        'blog.headline': '思考与随笔。',
+        'blog.subheadline': '关于技术、系统与创造的点滴记录。',
 
         'projects.headline': '精选项目。',
         'projects.subheadline': '近期技术深度探索的部分成果展示。',
@@ -107,6 +119,10 @@ export const ui = {
         'project.4.tech': 'Python, YOLO, OpenCV, SQLite',
         'project.4.desc': '优化了基于 YOLO 的目标检测算法，将跌倒检测的准确率从 42% 提升至 88%。利用 OpenCV 为海康威视视频流设计了多线程实时处理管道，并实现了基于 SQLite 的日志记录模块。',
         'project.4.link': '在 GitHub 上查看 >',
+
+        'blog.read_more': '阅读全文 →',
+        'blog.published_on': '发表于',
+        'blog.back_to_list': '返回博客列表',
 
         'footer.branding.title': 'playeriv65',
         'footer.branding.subtitle': '设计 · 编码 · 创造',

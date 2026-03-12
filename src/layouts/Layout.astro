@@ -16,20 +16,15 @@ const lang = getLangFromUrl(Astro.url);
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, viewport-fit=cover"
-		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#000000" />
-
 		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
 
-		<!-- Intersection Observer for Scroll Animations -->
 		<script>
 			const observerOptions = {
 				root: null,
@@ -37,23 +32,19 @@ const lang = getLangFromUrl(Astro.url);
 				threshold: 0.1,
 			};
 
-			const observer = new IntersectionObserver((entries, observer) => {
+			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						entry.target.classList.add("animate-fade-in-up");
+						entry.target.classList.add("appear");
 						observer.unobserve(entry.target);
 					}
 				});
 			}, observerOptions);
 
-			// Find all elements with the 'reveal-on-scroll' class
 			document.addEventListener("DOMContentLoaded", () => {
+				// Animate elements with reveal-on-scroll class using observer
 				const elements = document.querySelectorAll(".reveal-on-scroll");
-				elements.forEach((el) => {
-					observer.observe(el);
-					// Set initial state to hidden before animation kicks in
-					(el as HTMLElement).style.opacity = "0";
-				});
+				elements.forEach((el) => observer.observe(el));
 			});
 		</script>
 	</body>

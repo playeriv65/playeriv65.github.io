@@ -283,7 +283,7 @@ const t = useTranslations(lang);
     .bento-card {
         background-color: var(--card-bg);
         border-radius: var(--radius-card);
-        corner-shape: squircle; /* Premium Apple-style continuous curvature */
+        corner-shape: squircle;
         height: 450px;
         padding: 40px;
         display: flex;
@@ -293,14 +293,19 @@ const t = useTranslations(lang);
         overflow: hidden;
         transition:
             transform 0.3s var(--ease-apple),
-            background-color 0.3s ease;
+            background-color 0.3s ease,
+            box-shadow 0.3s ease;
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         border: none;
+        will-change: transform;
     }
 
     .bento-card:hover {
-        transform: scale(1.02);
+        transform: translateY(-4px);
         background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 
+            inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+            0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .bento-large {

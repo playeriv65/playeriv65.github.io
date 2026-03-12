@@ -10,7 +10,7 @@
     "admin": "concurrently \"npm run dev\" \"node cms/server/server.js\" \"npm run dev --prefix cms/client\""
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "astro": "^5.18.1"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

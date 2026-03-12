@@ -1,0 +1,69 @@
+---
+import "../styles/global.css";
+import { getLangFromUrl } from "../i18n/utils";
+
+interface Props {
+    title: string;
+    description: string;
+    pubDate: string | Date;
+}
+
+const { title, description, pubDate } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#000000" />
+
+        <title>{title} | Blog</title>
+        
+        <!-- Inline CSS to prevent flash of unstyled content -->
+        <style>
+            .reveal-on-scroll { opacity: 0 !important; transform: translateY(30px) !important; }
+            .appear { opacity: 1 !important; transform: translateY(0) !important; transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+            .blog-post-header { opacity: 0 !important; }
+            .blog-post-header.appear { opacity: 1 !important; transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+            .animate-fade-in-up { opacity: 0 !important; }
+        </style>
+    </head>
+    <body>
+        <slot />
+
+        <script>
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1,
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("appear");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const header = document.querySelector(".blog-post-header");
+                if (header) {
+                    setTimeout(() => header.classList.add("appear"), 10);
+                }
+
+                const contentSections = document.querySelectorAll(".reveal-on-scroll");
+                contentSections.forEach((el) => observer.observe(el));
+            });
+        </script>
+    </body>
+</html>

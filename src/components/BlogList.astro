@@ -1,0 +1,116 @@
+---
+import { getCollection } from "astro:content";
+import { useTranslations } from "../i18n/utils";
+import BlogPostCard from "./BlogPostCard.astro";
+
+export interface Props {
+    lang: "en" | "zh";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Fetch and filter blog posts (exclude drafts)
+const allPosts = await getCollection("blog", ({ data }) => {
+    return !data.draft;
+});
+
+// Sort by pubDate descending
+const sortedPosts = allPosts.sort((a, b) => {
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+---
+
+<section class="blog-section">
+    <div class="blog-container mx-auto">
+        <div class="blog-header">
+            <h2 class="section-title animate-fade-in-up">
+                {t("blog.headline")}
+            </h2>
+            <p class="section-subtitle animate-fade-in-up delay-100">
+                {t("blog.subheadline")}
+            </p>
+        </div>
+
+        <div class="blog-grid">
+            {
+                sortedPosts.map((post, index) => {
+                    const title = lang === "en" ? post.data.title_en : post.data.title_zh;
+                    const description = lang === "en" ? post.data.description_en : post.data.description_zh;
+                    // Remove .md extension from post.id to get clean slug
+                    const slug = post.id.replace(/\.md$/, '');
+                    const href = lang === "en" ? `/blog/${slug}/` : `/${lang}/blog/${slug}/`;
+
+                    return (
+                        <BlogPostCard
+                            title={title}
+                            description={description}
+                            pubDate={post.data.pubDate}
+                            href={href}
+                        />
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .blog-section {
+        padding: 80px 0;
+    }
+
+    .blog-container {
+        max-width: 980px;
+        padding: 0 22px;
+    }
+
+    .blog-header {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: clamp(40px, 6vw, 56px);
+        line-height: 1.07143;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+        margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+        font-size: 24px;
+        line-height: 1.16667;
+        font-weight: 400;
+        color: var(--color-text-muted);
+        letter-spacing: 0.009em;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".reveal-on-scroll");
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("appear");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach((card) => observer.observe(card));
+    });
+</script>

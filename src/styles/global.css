@@ -1,3 +1,20 @@
+/* Critical CSS: Prevent flash of unstyled content on page load */
+/* Only applies to reveal-on-scroll elements */
+.reveal-on-scroll { 
+    opacity: 0 !important; 
+    transform: translateY(30px) scale(0.98) !important; 
+}
+
+.reveal-on-scroll.appear {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+.reveal-on-scroll.appear:hover {
+    transform: scale(1.02) !important;
+}
+
 :root {
   /* Core Colors */
   --color-bg: #000000;
@@ -67,7 +84,7 @@ a:hover {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
-/* Animations */
+/* Keyframe animations for animate-fade-in-up class (used on homepage) */
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -80,6 +97,7 @@ a:hover {
 }
 
 .animate-fade-in-up {
+  opacity: 0;
   animation: fade-in-up 1s var(--ease-apple) forwards;
 }
 
@@ -120,5 +138,6 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(41, 151, 255, 0.1);
+    background-color: rgba(41, 151, 255, 0.1);
+    transform: scale(1.02);
 }

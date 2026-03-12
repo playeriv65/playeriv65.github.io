@@ -143,10 +143,12 @@ const t = useTranslations(lang);
 
   a {
     color: var(--color-text-muted);
+    transition: color 0.3s var(--ease-apple), opacity 0.3s var(--ease-apple);
   }
 
   a:hover {
-    text-decoration: underline;
+    color: var(--color-primary);
+    text-decoration: none;
     opacity: 1;
   }
 

@@ -48,7 +48,7 @@ const sortedEvents = allTimelineEvents.sort(
                         const imageInput = event.data.image;
 
                         return (
-                            <div class="timeline-item animate-on-scroll">
+                            <div class="timeline-item reveal-on-scroll">
                                 <div class="timeline-node">
                                     <span class="node-year">
                                         {event.data.year}
@@ -150,18 +150,8 @@ const sortedEvents = allTimelineEvents.sort(
         padding-left: 80px;
     }
 
-    /* Animation initial states */
-    .timeline-item.animate-on-scroll {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-        transition:
-            opacity 0.8s var(--ease-apple),
-            transform 0.8s var(--ease-apple);
-    }
-    .timeline-item.animate-on-scroll.appear {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    /* Use global reveal-on-scroll styles from global.css */
+    /* Animation is handled by global.css .reveal-on-scroll and .appear */
 
     /* Node Dot */
     .timeline-node {

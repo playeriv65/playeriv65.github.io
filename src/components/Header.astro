@@ -7,15 +7,15 @@ const t = useTranslations(lang);
 
 const navItems = [
   { name: t("nav.home"), href: lang === "en" ? "/" : `/${lang}/` },
+  { name: t("nav.blog"), href: lang === "en" ? "/blog" : `/${lang}/blog` },
   { name: t("nav.projects"), href: "#projects" },
   { name: t("nav.about"), href: "#about" },
 ];
 ---
 
-<header class="global-nav glass animate-fade-in-up">
+<header class="global-nav glass">
   <div class="nav-content mx-auto">
     <a href="/" class="nav-logo" aria-label="Home">
-      <!-- Text Logo -->
       <span
         style="font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em;"
         >playeriv65</span
@@ -76,7 +76,7 @@ const navItems = [
     height: 100%;
     flex: 1;
     display: flex;
-    justify-content: flex-end; /* Align right on desktop for now */
+    justify-content: flex-end;
   }
 
   .nav-list {
@@ -99,11 +99,12 @@ const navItems = [
     letter-spacing: -0.01em;
     color: var(--color-text);
     opacity: 0.8;
+    transition: opacity 0.3s var(--ease-apple);
   }
 
   @media (max-width: 833px) {
     .nav-links {
-      display: none; /* Hide on mobile to emulate Apple's collapsed menu */
+      display: none;
     }
   }
 </style>
