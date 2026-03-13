@@ -27,3 +27,5 @@ GEMINI.md
 
 # test files
 temp/
+scripts/screenshot-*.js
+scripts/screenshots-*/
