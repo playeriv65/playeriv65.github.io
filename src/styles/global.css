@@ -1,11 +1,11 @@
 @import "@fontsource-variable/inter/wght.css";
 
 :root {
-    --color-bg: #f8fafc;
+    --color-bg: #ffffff;
     --color-surface: #ffffff;
-    --color-heading: #111827;
-    --color-text: #2f3746;
-    --color-text-muted: #5f6b7a;
+    --color-heading: #080b10;
+    --color-text: #20242b;
+    --color-text-muted: #4d5562;
     --color-primary: #175cd3;
     --color-border: #dbe2ea;
     --glass-border: #dbe2ea;
@@ -20,9 +20,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-    background:
-        radial-gradient(circle at 75% 8%, rgba(23, 92, 211, .055), transparent 26rem),
-        var(--color-bg);
+    background: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-size: 16px;
@@ -43,18 +41,18 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 @keyframes rise-in {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { transform: translateY(14px); }
+    to { transform: translateY(0); }
 }
 
 @keyframes section-in {
-    from { opacity: .35; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { transform: translateY(18px); }
+    to { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
     .hero-main { animation: rise-in .62s cubic-bezier(.2, .8, .2, 1) both; }
-    .summary-card { animation: rise-in .62s .1s cubic-bezier(.2, .8, .2, 1) both; }
+    .portrait { animation: rise-in .62s .1s cubic-bezier(.2, .8, .2, 1) both; }
 
     @supports (animation-timeline: view()) {
         main > section:not(.hero),

@@ -4,14 +4,8 @@ import { getLangFromUrl } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const content = {
     en: {
-        eyebrow: "University of Minnesota · Computer Science",
         title: "Zelin Li",
-        subtitle: "Computer science student and researcher working on efficient LLM systems.",
-        intro: "I am an undergraduate at the University of Minnesota, Twin Cities. My interests include LLM inference and post-training, zeroth-order optimization, and algorithm-system co-design.",
-        currentTitle: "Currently",
-        current: "Research Assistant at the University of Minnesota",
-        focusTitle: "Research focus",
-        focus: "Efficient LLM systems and zeroth-order optimization",
+        subtitle: "Computer Science student at the University of Minnesota, focused on efficient LLM systems and zeroth-order optimization.",
         links: { cv: "CV", email: "Email", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "Education", research: "Research Experience", publications: "Publications & Preprints", projects: "Selected Projects", honors: "Honors & Awards", skills: "Technical Skills" },
         education: [
@@ -36,14 +30,8 @@ const content = {
         skills: [["Programming", "Python, C++"], ["Frameworks", "PyTorch, vLLM, Hugging Face Transformers"], ["Tools", "Linux, Git"]],
     },
     zh: {
-        eyebrow: "明尼苏达大学 · 计算机科学",
         title: "李泽林",
-        subtitle: "计算机科学本科生，研究高效大语言模型系统。",
-        intro: "现就读于明尼苏达大学双城分校。研究兴趣包括大模型推理与后训练、零阶优化，以及算法与系统协同设计。",
-        currentTitle: "目前",
-        current: "明尼苏达大学研究助理",
-        focusTitle: "研究方向",
-        focus: "高效大模型系统与零阶优化",
+        subtitle: "明尼苏达大学计算机科学本科生，研究高效大语言模型系统与零阶优化。",
         links: { cv: "学术简历", email: "邮箱", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "教育经历", research: "研究经历", publications: "论文与预印本", projects: "精选项目", honors: "荣誉与奖项", skills: "技术能力" },
         education: [
@@ -74,10 +62,8 @@ const c = content[lang];
 <main>
     <section class="hero" id="about">
         <div class="hero-main">
-            <p class="eyebrow">{c.eyebrow}</p>
             <h1>{c.title}</h1>
             <p class="subtitle">{c.subtitle}</p>
-            <p class="intro">{c.intro}</p>
             <div class="contact-links" aria-label="Contact links">
                 <a href="/resume.pdf" target="_blank">{c.links.cv}</a>
                 <a href="mailto:li004593@umn.edu">{c.links.email}</a>
@@ -85,10 +71,7 @@ const c = content[lang];
                 <a href="https://www.linkedin.com/in/zelin-li-65a461355" target="_blank">{c.links.linkedin}</a>
             </div>
         </div>
-        <aside class="summary-card">
-            <div><span>{c.currentTitle}</span><p>{c.current}</p></div>
-            <div><span>{c.focusTitle}</span><p>{c.focus}</p></div>
-        </aside>
+        <figure class="portrait"><img src="/profile.webp" width="640" height="640" alt="Zelin Li" loading="eager" fetchpriority="high" /></figure>
     </section>
 
     <section id="education">
@@ -119,17 +102,14 @@ const c = content[lang];
 
 <style>
     main { max-width: 960px; margin: 0 auto; padding: 96px 24px 72px; counter-reset: section; }
-    .hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, .8fr); gap: 72px; align-items: start; padding: 64px 0 72px; border-bottom: 1px solid var(--color-border); }
-    .eyebrow { color: var(--color-primary); font-size: .82rem; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; margin-bottom: 18px; }
-    h1 { font-size: clamp(3.2rem, 8vw, 5.5rem); line-height: .98; font-weight: 760; letter-spacing: -.055em; margin-bottom: 22px; }
-    .subtitle { max-width: 680px; font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.25; color: var(--color-heading); margin-bottom: 20px; letter-spacing: -.018em; }
-    .intro { max-width: 660px; color: var(--color-text-muted); font-size: 1.04rem; line-height: 1.7; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 72px; align-items: center; padding: 64px 0 72px; border-bottom: 1px solid var(--color-border); }
+    h1 { color: var(--color-heading); font-size: clamp(3.2rem, 8vw, 5.5rem); line-height: .98; font-weight: 780; letter-spacing: -.055em; margin-bottom: 24px; }
+    .subtitle { max-width: 620px; font-size: clamp(1.3rem, 3vw, 1.72rem); line-height: 1.35; color: var(--color-text); letter-spacing: -.018em; }
     .contact-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
     .contact-links a { color: var(--color-heading); background: rgba(255, 255, 255, .72); border: 1px solid var(--color-border); border-radius: 999px; padding: 9px 15px; font-weight: 650; transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease; }
     .contact-links a:hover { color: var(--color-primary); background: white; border-color: #9fb4d2; text-decoration: none; transform: translateY(-1px); }
-    .summary-card { background: linear-gradient(145deg, #fff, #f4f7fb); border: 1px solid var(--color-border); border-radius: 10px; padding: 22px; display: grid; gap: 22px; box-shadow: 0 12px 30px rgba(26, 46, 78, .05); }
-    .summary-card span { display: block; color: var(--color-text-muted); font-size: .76rem; font-weight: 750; letter-spacing: .065em; text-transform: uppercase; margin-bottom: 5px; }
-    .summary-card p { color: var(--color-heading); line-height: 1.45; }
+    .portrait { width: 240px; aspect-ratio: 1; border: 1px solid var(--color-border); border-radius: 18px; overflow: hidden; background: white; }
+    .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
     section { scroll-margin-top: 80px; padding: 58px 0; border-bottom: 1px solid var(--color-border); }
     section:not(.hero) { counter-increment: section; }
     section h2 { color: var(--color-heading); font-size: 1.55rem; margin-bottom: 28px; letter-spacing: -.025em; display: flex; align-items: center; gap: 16px; }
@@ -137,11 +117,11 @@ const c = content[lang];
     .stack { display: grid; gap: 30px; }
     .row-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
     h3 { color: var(--color-heading); font-size: 1.02rem; line-height: 1.4; }
-    .row-item p, .publication-list p { color: var(--color-text-muted); margin-top: 3px; }
-    .detail { font-size: .92rem; }
+    .row-item p, .publication-list p { color: var(--color-text); margin-top: 3px; }
+    .detail { color: var(--color-text-muted) !important; font-size: .92rem; }
     time { color: var(--color-text-muted); font-size: .9rem; white-space: nowrap; }
     ul { padding-left: 1.2rem; }
-    .research-item ul { color: var(--color-text-muted); margin-top: 12px; line-height: 1.6; }
+    .research-item ul { color: var(--color-text); margin-top: 12px; line-height: 1.6; }
     .research-item li + li { margin-top: 4px; }
     .publication-list { padding-left: 1.5rem; display: grid; gap: 24px; }
     .publication-list li { padding-left: 8px; }
@@ -150,19 +130,21 @@ const c = content[lang];
     .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .project-card { border: 1px solid var(--color-border); border-radius: 10px; padding: 22px; background: var(--color-surface); min-height: 190px; display: flex; flex-direction: column; transition: border-color .18s ease, transform .18s ease; }
     .project-card:hover { border-color: #aebbd0; transform: translateY(-2px); }
-    .project-card p { color: var(--color-text-muted); line-height: 1.55; margin: 10px 0 24px; }
+    .project-card p { color: var(--color-text); line-height: 1.55; margin: 10px 0 24px; }
     .project-card span { color: var(--color-primary); font-size: .8rem; font-weight: 700; margin-top: auto; }
     .two-column-sections { display: grid; grid-template-columns: 1.25fr .75fr; gap: 70px; }
     .two-column-sections section { border-bottom: 0; }
-    .plain-list { color: var(--color-text-muted); line-height: 1.6; }
+    .plain-list { color: var(--color-text); line-height: 1.6; }
     .plain-list li + li { margin-top: 8px; }
     dl { display: grid; gap: 18px; }
     dl div { display: grid; gap: 3px; }
     dt { color: var(--color-heading); font-weight: 700; }
-    dd { color: var(--color-text-muted); }
+    dd { color: var(--color-text); }
     @media (max-width: 760px) {
         main { padding-top: 76px; }
-        .hero { grid-template-columns: 1fr; gap: 34px; padding: 44px 0 56px; }
+        .hero { grid-template-columns: 1fr; gap: 30px; padding: 44px 0 56px; }
+        .portrait { width: 156px; grid-row: 1; }
+        .hero-main { grid-row: 2; }
         .row-item { grid-template-columns: 1fr; gap: 6px; }
         .project-grid, .two-column-sections { grid-template-columns: 1fr; }
         .two-column-sections { gap: 0; }

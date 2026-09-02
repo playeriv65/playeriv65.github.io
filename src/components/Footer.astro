@@ -1,12 +1,10 @@
 ---
-import { getLangFromUrl } from "../i18n/utils";
-const lang = getLangFromUrl(Astro.url);
-const note = lang === "en" ? "Computer Science student at the University of Minnesota." : "明尼苏达大学计算机科学本科生。";
+const year = new Date().getFullYear();
 ---
 
 <footer>
     <div class="footer-wrap">
-        <div><strong>Zelin Li</strong><p>{note}</p></div>
+        <strong>© {year} Zelin Li</strong>
         <div class="links">
             <a href="mailto:li004593@umn.edu">Email</a>
             <a href="https://github.com/playeriv65" target="_blank">GitHub</a>
@@ -17,9 +15,8 @@ const note = lang === "en" ? "Computer Science student at the University of Minn
 
 <style>
     footer { border-top: 1px solid var(--color-border); padding: 30px 24px 42px; }
-    .footer-wrap { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; color: var(--color-text-muted); font-size: .86rem; }
+    .footer-wrap { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; color: var(--color-text); font-size: .86rem; }
     strong { color: var(--color-heading); }
-    p { margin-top: 3px; }
     .links { display: flex; gap: 20px; }
     @media (max-width: 600px) { .footer-wrap { flex-direction: column; } }
 </style>
