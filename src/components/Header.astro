@@ -4,10 +4,9 @@ import LanguagePicker from "./LanguagePicker.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const home = lang === "en" ? "/" : "/zh/";
-const blog = lang === "en" ? "/blog/" : "/zh/blog/";
 const labels = lang === "en"
-    ? { education: "Education", research: "Research", publications: "Publications", projects: "Projects", blog: "Notes" }
-    : { education: "教育", research: "研究", publications: "论文", projects: "项目", blog: "随笔" };
+    ? { education: "Education", research: "Research", publications: "Publications", projects: "Projects" }
+    : { education: "教育", research: "研究", publications: "论文", projects: "项目" };
 ---
 
 <header>
@@ -18,7 +17,6 @@ const labels = lang === "en"
             <a href={`${home}#research`}>{labels.research}</a>
             <a href={`${home}#publications`}>{labels.publications}</a>
             <a href={`${home}#projects`}>{labels.projects}</a>
-            <a href={blog}>{labels.blog}</a>
             <LanguagePicker />
         </nav>
     </div>
