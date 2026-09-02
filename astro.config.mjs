@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://playeriv65.github.io',
+    site: 'https://playeriv65.com',
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'zh'],

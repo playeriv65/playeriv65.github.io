@@ -56,9 +56,7 @@ const sortedPosts = allPosts.sort((a, b) => {
 </section>
 
 <style>
-    .blog-section {
-        padding: 80px 0;
-    }
+    .blog-section { padding: 118px 0 72px; min-height: 80vh; }
 
     .blog-container {
         max-width: 980px;
@@ -66,30 +64,28 @@ const sortedPosts = allPosts.sort((a, b) => {
     }
 
     .blog-header {
-        margin-bottom: 80px;
-        text-align: center;
+        margin-bottom: 38px;
     }
 
     .section-title {
-        font-size: clamp(40px, 6vw, 56px);
-        line-height: 1.07143;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        margin-bottom: 20px;
+        font-size: clamp(2.2rem, 5vw, 3.4rem);
+        line-height: 1.05;
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        margin-bottom: 12px;
     }
 
     .section-subtitle {
-        font-size: 24px;
-        line-height: 1.16667;
-        font-weight: 400;
+        font-size: 1.05rem;
+        line-height: 1.5;
         color: var(--color-text-muted);
         letter-spacing: 0.009em;
     }
 
     .blog-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
     }
 
     @media (max-width: 768px) {
@@ -98,19 +94,3 @@ const sortedPosts = allPosts.sort((a, b) => {
         }
     }
 </style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const cards = document.querySelectorAll(".reveal-on-scroll");
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("appear");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        cards.forEach((card) => observer.observe(card));
-    });
-</script>

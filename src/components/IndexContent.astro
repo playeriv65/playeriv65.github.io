@@ -1,381 +1,171 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import Timeline from "./Timeline.astro";
+import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const content = {
+    en: {
+        eyebrow: "University of Minnesota · Computer Science",
+        title: "Zelin Li",
+        subtitle: "Computer science student and researcher working on efficient LLM systems.",
+        intro: "I am an undergraduate at the University of Minnesota, Twin Cities. My interests include LLM inference and post-training, zeroth-order optimization, and algorithm-system co-design.",
+        currentTitle: "Currently",
+        current: "Research Assistant at the University of Minnesota",
+        focusTitle: "Research focus",
+        focus: "Efficient LLM systems and zeroth-order optimization",
+        links: { cv: "CV", email: "Email", github: "GitHub", linkedin: "LinkedIn" },
+        sections: { education: "Education", research: "Research Experience", publications: "Publications & Preprints", projects: "Selected Projects", honors: "Honors & Awards", skills: "Technical Skills" },
+        education: [
+            { school: "University of Minnesota, Twin Cities", degree: "B.S. in Computer Science", date: "2025–2027", detail: "GPA: 4.0/4.0" },
+            { school: "Beijing University of Posts and Telecommunications", degree: "Artificial Intelligence", date: "2023–2025", detail: "GPA: 3.85/4.0 · Rank: 1/180" },
+        ],
+        research: [
+            { role: "Research Assistant", place: "University of Minnesota · Prof. Caiwen Ding", date: "Apr 2026–Present", bullets: ["Developing inference-native execution methods for zeroth-order optimization in LLM systems.", "Studying structured search spaces, mini-batch noise, and efficient candidate-state evaluation."] },
+            { role: "Research Assistant", place: "University of Minnesota · Prof. Zirui Liu, with Wenya Xie", date: "Nov 2025–Mar 2026", bullets: ["Implemented and evaluated long-horizon memory systems including HippoRAG and SimpleMem.", "Contributed to benchmark construction, data auditing, experimental analysis, and manuscript preparation."] },
+        ],
+        publications: [
+            { title: "Inference-Native Zeroth-Order Optimization", authors: "Zelin Li, Caiwen Ding", venue: "Preprint, 2026" },
+            { title: "Sample-Stable Subspaces and Mini-Batch Noise in Zeroth-Order Fine-Tuning", authors: "Zelin Li, Caiwen Ding", venue: "Preprint, 2026" },
+            { title: "DynamicMem: A Long-Horizon Memory Benchmark in Real-World Settings", authors: "Wenya Xie, Shengming Zhou, Zelin Li, et al.", venue: "arXiv:2606.22877, 2026", href: "https://arxiv.org/abs/2606.22877" },
+        ],
+        projects: [
+            { title: "zo-vLLM", desc: "An inference-native system for zeroth-order optimization of large language models.", tech: "Python · PyTorch · vLLM", href: "https://github.com/playeriv65/zo-vllm" },
+            { title: "EasyLocomo", desc: "A unified interface and reproducible benchmark framework for long-horizon LLM memory systems.", tech: "Python · PyTorch · LLM evaluation", href: "https://github.com/playeriv65/EasyLocomo" },
+            { title: "Auto-Chronicle Gaokao", desc: "A 120-week state-machine narrative engine with a multi-agent classroom simulation.", tech: "Python · LLM APIs · Agents", href: "https://github.com/playeriv65/ACG--Auto-Chronicle-Gaokao" },
+        ],
+        honors: ["National Scholarship, Ministry of Education of China (5/470), 2024", "ICPC Asia Shenyang Regional Silver Medal (84/399), 2024", "CCPC Harbin and Beijing Bronze Medals, 2024", "NOIP Shanxi First Prize, 2021"],
+        skills: [["Programming", "Python, C++"], ["Frameworks", "PyTorch, vLLM, Hugging Face Transformers"], ["Tools", "Linux, Git"]],
+    },
+    zh: {
+        eyebrow: "明尼苏达大学 · 计算机科学",
+        title: "李泽林",
+        subtitle: "计算机科学本科生，研究高效大语言模型系统。",
+        intro: "现就读于明尼苏达大学双城分校。研究兴趣包括大模型推理与后训练、零阶优化，以及算法与系统协同设计。",
+        currentTitle: "目前",
+        current: "明尼苏达大学研究助理",
+        focusTitle: "研究方向",
+        focus: "高效大模型系统与零阶优化",
+        links: { cv: "学术简历", email: "邮箱", github: "GitHub", linkedin: "LinkedIn" },
+        sections: { education: "教育经历", research: "研究经历", publications: "论文与预印本", projects: "精选项目", honors: "荣誉与奖项", skills: "技术能力" },
+        education: [
+            { school: "明尼苏达大学双城分校", degree: "计算机科学学士", date: "2025–2027", detail: "GPA：4.0/4.0" },
+            { school: "北京邮电大学", degree: "人工智能", date: "2023–2025", detail: "GPA：3.85/4.0 · 专业排名：1/180" },
+        ],
+        research: [
+            { role: "研究助理", place: "明尼苏达大学 · 丁才文教授", date: "2026 年 4 月至今", bullets: ["研究面向大语言模型零阶优化的推理原生执行方法。", "研究结构化搜索空间、小批量噪声与高效候选状态评估。"] },
+            { role: "研究助理", place: "明尼苏达大学 · 刘子瑞教授，与谢文雅合作", date: "2025 年 11 月–2026 年 3 月", bullets: ["实现并评估 HippoRAG、SimpleMem 等长时程记忆系统。", "参与基准数据构建、人工审计、实验分析与论文撰写。"] },
+        ],
+        publications: [
+            { title: "Inference-Native Zeroth-Order Optimization", authors: "Zelin Li, Caiwen Ding", venue: "预印本，2026" },
+            { title: "Sample-Stable Subspaces and Mini-Batch Noise in Zeroth-Order Fine-Tuning", authors: "Zelin Li, Caiwen Ding", venue: "预印本，2026" },
+            { title: "DynamicMem: A Long-Horizon Memory Benchmark in Real-World Settings", authors: "Wenya Xie, Shengming Zhou, Zelin Li, et al.", venue: "arXiv:2606.22877，2026", href: "https://arxiv.org/abs/2606.22877" },
+        ],
+        projects: [
+            { title: "zo-vLLM", desc: "面向大语言模型零阶优化的推理原生系统。", tech: "Python · PyTorch · vLLM", href: "https://github.com/playeriv65/zo-vllm" },
+            { title: "EasyLocomo", desc: "面向长时程大模型记忆系统的统一接口与可复现评测框架。", tech: "Python · PyTorch · 大模型评测", href: "https://github.com/playeriv65/EasyLocomo" },
+            { title: "高考自动编年史", desc: "包含 120 周状态机与多智能体班级模拟的叙事引擎。", tech: "Python · 大模型 API · 智能体", href: "https://github.com/playeriv65/ACG--Auto-Chronicle-Gaokao" },
+        ],
+        honors: ["国家奖学金（5/470），2024", "ICPC 亚洲沈阳区域赛银牌（84/399），2024", "CCPC 哈尔滨与北京赛站铜牌，2024", "NOIP 山西一等奖，2021"],
+        skills: [["编程语言", "Python、C++"], ["框架", "PyTorch、vLLM、Hugging Face Transformers"], ["工具", "Linux、Git"]],
+    },
+} as const;
+const c = content[lang];
 ---
 
 <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content mx-auto text-center">
-            <h1 class="hero-title animate-fade-in-up">{t("hero.title")}</h1>
-            <p class="hero-subtitle animate-fade-in-up delay-100">
-                {t("hero.subtitle")}
-            </p>
-            <div class="hero-cta animate-fade-in-up delay-200">
-                <a href="#projects" class="btn btn-primary"
-                    >{t("hero.btn.featured")}</a
-                >
-                <a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-secondary">{t("hero.btn.resume")}</a
-                >
+    <section class="hero" id="about">
+        <div class="hero-main">
+            <p class="eyebrow">{c.eyebrow}</p>
+            <h1>{c.title}</h1>
+            <p class="subtitle">{c.subtitle}</p>
+            <p class="intro">{c.intro}</p>
+            <div class="contact-links" aria-label="Contact links">
+                <a class="primary-link" href="/resume.pdf" target="_blank">{c.links.cv}</a>
+                <a href="mailto:li004593@umn.edu">{c.links.email}</a>
+                <a href="https://github.com/playeriv65" target="_blank">{c.links.github}</a>
+                <a href="https://www.linkedin.com/in/zelin-li-65a461355" target="_blank">{c.links.linkedin}</a>
             </div>
         </div>
-
-        <!-- Abstract visual element (glow) -->
-        <div class="glow-container animate-fade-in-up delay-300">
-            <div class="glow"></div>
-        </div>
+        <aside class="summary-card">
+            <div><span>{c.currentTitle}</span><p>{c.current}</p></div>
+            <div><span>{c.focusTitle}</span><p>{c.focus}</p></div>
+        </aside>
     </section>
 
-    <!-- Introduction Section -->
-    <section id="about" class="intro-section reveal-on-scroll">
-        <div
-            class="content-wrapper mx-auto text-center border-bottom-glass pb-120"
-        >
-            <h2 class="section-headline">{t("intro.headline")}</h2>
-            <p class="intro-body text-muted">
-                {t("intro.body.1")}<strong>{t("intro.body.university")}</strong
-                >{t("intro.body.2")}<br /><br />
-                {t("intro.body.3")}<strong>{t("intro.body.systems")}</strong>{
-                    t("intro.body.4")
-                }<strong>{t("intro.body.ai")}</strong>{t("intro.body.5")}
-            </p>
-        </div>
+    <section id="education">
+        <h2>{c.sections.education}</h2>
+        <div class="stack">{c.education.map((item) => <article class="row-item"><div><h3>{item.school}</h3><p>{item.degree}</p><p class="detail">{item.detail}</p></div><time>{item.date}</time></article>)}</div>
     </section>
 
-    <!-- Timeline / Journey Section -->
-    <Timeline lang={lang} />
-
-    <!-- Projects Grid -->
-    <section id="projects" class="projects-section">
-        <div class="content-wrapper mx-auto">
-            <div class="section-header text-center reveal-on-scroll">
-                <h2 class="section-headline">{t("projects.headline")}</h2>
-                <p class="section-subheadline text-muted">
-                    {t("projects.subheadline")}
-                </p>
-            </div>
-
-            <div class="bento-grid">
-                <!-- Project 1 (Large) -->
-                <div class="bento-card bento-large reveal-on-scroll">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">{t("project.1.title")}</h3>
-                            <p class="card-tech">{t("project.1.tech")}</p>
-                        </div>
-                        <p class="card-desc">
-                            {t("project.1.desc")}
-                        </p>
-                        <a
-                            href="https://github.com/playeriv65/EasyLocomo"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="card-link">{t("project.1.link")}</a
-                        >
-                    </div>
-                </div>
-
-                <!-- Project 2 (Small) -->
-                <div class="bento-card reveal-on-scroll delay-100">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">{t("project.2.title")}</h3>
-                            <p class="card-tech">{t("project.2.tech")}</p>
-                        </div>
-                        <p class="card-desc">
-                            {t("project.2.desc")}
-                        </p>
-                        <a
-                            href="https://github.com/playeriv65/todo"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="card-link">{t("project.2.link")}</a
-                        >
-                    </div>
-                </div>
-
-                <!-- Project 3 (Small) -->
-                <div class="bento-card reveal-on-scroll delay-200">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">{t("project.3.title")}</h3>
-                            <p class="card-tech">{t("project.3.tech")}</p>
-                        </div>
-                        <p class="card-desc">
-                            {t("project.3.desc")}
-                        </p>
-                        <a
-                            href="https://github.com/playeriv65/ACG--Auto-Chronicle-Gaokao"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="card-link">{t("project.3.link")}</a
-                        >
-                    </div>
-                </div>
-
-                <!-- Project 4 (Large) -->
-                <div class="bento-card bento-large reveal-on-scroll delay-100">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">{t("project.4.title")}</h3>
-                            <p class="card-tech">{t("project.4.tech")}</p>
-                        </div>
-                        <p class="card-desc">
-                            {t("project.4.desc")}
-                        </p>
-                        <a
-                            href="https://github.com/playeriv65/Monitor"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="card-link">{t("project.4.link")}</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section id="research">
+        <h2>{c.sections.research}</h2>
+        <div class="stack">{c.research.map((item) => <article class="row-item research-item"><div><h3>{item.role}</h3><p>{item.place}</p><ul>{item.bullets.map((bullet) => <li>{bullet}</li>)}</ul></div><time>{item.date}</time></article>)}</div>
     </section>
+
+    <section id="publications">
+        <h2>{c.sections.publications}</h2>
+        <ol class="publication-list">{c.publications.map((item) => <li><h3>{item.href ? <a href={item.href} target="_blank">{item.title}</a> : item.title}</h3><p>{item.authors}</p><p class="detail">{item.venue}</p></li>)}</ol>
+    </section>
+
+    <section id="projects">
+        <h2>{c.sections.projects}</h2>
+        <div class="project-grid">{c.projects.map((project) => <article class="project-card"><h3><a href={project.href} target="_blank">{project.title}</a></h3><p>{project.desc}</p><span>{project.tech}</span></article>)}</div>
+    </section>
+
+    <div class="two-column-sections">
+        <section id="honors"><h2>{c.sections.honors}</h2><ul class="plain-list">{c.honors.map((item) => <li>{item}</li>)}</ul></section>
+        <section id="skills"><h2>{c.sections.skills}</h2><dl>{c.skills.map(([term, value]) => <div><dt>{term}</dt><dd>{value}</dd></div>)}</dl></section>
+    </div>
 </main>
 
 <style>
-    main {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    .content-wrapper {
-        max-width: 980px;
-        padding: 0 22px;
-    }
-
-    .pb-120 {
-        padding-bottom: 120px;
-    }
-
-    .border-bottom-glass {
-        border-bottom: 1px solid var(--glass-border);
-    }
-
-    /* Hero Section */
-    .hero-section {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 44px; /* Offset for header */
-        position: relative;
-    }
-
-    .hero-content {
-        z-index: 10;
-        max-width: 800px;
-        padding: 0 22px;
-    }
-
-    .hero-title {
-        font-size: clamp(56px, 8vw, 96px);
-        line-height: 1.05;
-        font-weight: 700;
-        letter-spacing: -0.015em;
-        margin-bottom: 16px;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(24px, 4vw, 32px);
-        line-height: 1.1;
-        font-weight: 500;
-        color: var(--color-text-muted);
-        margin-bottom: 24px;
-    }
-
-    .hero-cta {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        margin-top: 32px;
-    }
-
-    /* Abstract Glow */
-    .glow-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 50vh;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .glow {
-        width: 100vw;
-        max-width: 900px;
-        height: 400px;
-        background: radial-gradient(
-            50% 50% at 50% 50%,
-            rgba(41, 151, 255, 0.15) 0%,
-            rgba(41, 151, 255, 0) 100%
-        );
-        filter: blur(40px);
-        margin-bottom: -50px; /* Let it sit just right at the horizon */
-    }
-
-    /* Typography Sections */
-    .section-headline {
-        font-size: clamp(40px, 6vw, 56px);
-        line-height: 1.07143;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        margin-bottom: 20px;
-    }
-
-    .section-subheadline {
-        font-size: 24px;
-        line-height: 1.16667;
-        font-weight: 400;
-        color: var(--color-text-muted);
-        letter-spacing: 0.009em;
-        margin-bottom: 60px;
-    }
-
-    .text-muted {
-        color: var(--color-text-muted);
-    }
-
-    /* Intro */
-    .intro-section {
-        padding: 120px 0 0 0;
-    }
-
-    .intro-body {
-        font-size: clamp(20px, 3vw, 28px);
-        line-height: 1.4;
-        font-weight: 400;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .intro-body strong {
-        font-weight: 600;
-        color: var(--color-text);
-    }
-
-    /* Projects / Bento Grid */
-    .projects-section {
-        padding: 80px 0;
-    }
-
-    .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
-
-    .bento-card {
-        background-color: var(--card-bg);
-        border-radius: var(--radius-card);
-        corner-shape: squircle;
-        height: 450px;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-        transition:
-            transform 0.3s var(--ease-apple),
-            background-color 0.3s ease,
-            box-shadow 0.3s ease;
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-        border: none;
-        will-change: transform;
-    }
-
-    .bento-card:hover {
-        transform: translateY(-4px);
-        background-color: rgba(255, 255, 255, 0.05);
-        box-shadow: 
-            inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-            0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .bento-large {
-        grid-column: span 2;
-        height: 400px;
-    }
-
-    .card-header {
-        margin-bottom: 16px;
-    }
-
-    .card-title {
-        font-size: 28px;
-        font-weight: 600;
-        margin-bottom: 6px;
-        letter-spacing: -0.01em;
-    }
-
-    .card-tech {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--color-primary);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .card-desc {
-        font-size: 18px;
-        line-height: 1.5;
-        color: var(--color-text-muted);
-        margin-bottom: 24px;
-    }
-
-    .card-link {
-        margin-top: auto;
-        display: inline-flex;
-        align-items: center;
-        font-weight: 600;
-        color: var(--color-text);
-        transition: color 0.2s ease;
-    }
-
-    .card-link:hover {
-        color: var(--color-primary);
-    }
-
-    @media (max-width: 768px) {
-        .bento-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .bento-large {
-            grid-column: span 1;
-            height: auto;
-            min-height: 400px;
-        }
-
-        .bento-card {
-            height: auto;
-            min-height: 400px;
-        }
-
-        .hero-cta {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .btn {
-            width: 100%;
-            max-width: 300px;
-        }
+    main { max-width: 960px; margin: 0 auto; padding: 96px 24px 72px; counter-reset: section; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, .8fr); gap: 72px; align-items: start; padding: 64px 0 72px; border-bottom: 1px solid var(--color-border); }
+    .eyebrow { color: var(--color-primary); font-size: .82rem; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { font-size: clamp(3.2rem, 8vw, 5.5rem); line-height: .98; font-weight: 760; letter-spacing: -.055em; margin-bottom: 22px; }
+    .subtitle { max-width: 680px; font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.25; color: var(--color-heading); margin-bottom: 20px; letter-spacing: -.018em; }
+    .intro { max-width: 660px; color: var(--color-text-muted); font-size: 1.04rem; line-height: 1.7; }
+    .contact-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-top: 28px; }
+    .contact-links a { font-weight: 650; }
+    .contact-links .primary-link { color: white; background: var(--color-primary); border-radius: 6px; padding: 9px 15px; }
+    .summary-card { background: linear-gradient(145deg, #fff, #f4f7fb); border: 1px solid var(--color-border); border-radius: 10px; padding: 22px; display: grid; gap: 22px; box-shadow: 0 12px 30px rgba(26, 46, 78, .05); }
+    .summary-card span { display: block; color: var(--color-text-muted); font-size: .76rem; font-weight: 750; letter-spacing: .065em; text-transform: uppercase; margin-bottom: 5px; }
+    .summary-card p { color: var(--color-heading); line-height: 1.45; }
+    section { scroll-margin-top: 80px; padding: 58px 0; border-bottom: 1px solid var(--color-border); }
+    section:not(.hero) { counter-increment: section; }
+    section h2 { color: var(--color-heading); font-size: 1.55rem; margin-bottom: 28px; letter-spacing: -.025em; display: flex; align-items: baseline; gap: 12px; }
+    section h2::before { content: "0" counter(section); color: var(--color-primary); font: 700 .72rem/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .04em; }
+    .stack { display: grid; gap: 30px; }
+    .row-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
+    h3 { color: var(--color-heading); font-size: 1.02rem; line-height: 1.4; }
+    .row-item p, .publication-list p { color: var(--color-text-muted); margin-top: 3px; }
+    .detail { font-size: .92rem; }
+    time { color: var(--color-text-muted); font-size: .9rem; white-space: nowrap; }
+    ul { padding-left: 1.2rem; }
+    .research-item ul { color: var(--color-text-muted); margin-top: 12px; line-height: 1.6; }
+    .research-item li + li { margin-top: 4px; }
+    .publication-list { padding-left: 1.5rem; display: grid; gap: 24px; }
+    .publication-list li { padding-left: 8px; }
+    .publication-list h3 a, .project-card h3 a { color: var(--color-heading); }
+    .publication-list h3 a:hover, .project-card h3 a:hover { color: var(--color-primary); }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .project-card { border: 1px solid var(--color-border); border-radius: 10px; padding: 22px; background: var(--color-surface); min-height: 190px; display: flex; flex-direction: column; transition: border-color .18s ease, transform .18s ease; }
+    .project-card:hover { border-color: #aebbd0; transform: translateY(-2px); }
+    .project-card p { color: var(--color-text-muted); line-height: 1.55; margin: 10px 0 24px; }
+    .project-card span { color: var(--color-primary); font-size: .8rem; font-weight: 700; margin-top: auto; }
+    .two-column-sections { display: grid; grid-template-columns: 1.25fr .75fr; gap: 70px; }
+    .two-column-sections section { border-bottom: 0; }
+    .plain-list { color: var(--color-text-muted); line-height: 1.6; }
+    .plain-list li + li { margin-top: 8px; }
+    dl { display: grid; gap: 18px; }
+    dl div { display: grid; gap: 3px; }
+    dt { color: var(--color-heading); font-weight: 700; }
+    dd { color: var(--color-text-muted); }
+    @media (max-width: 760px) {
+        main { padding-top: 76px; }
+        .hero { grid-template-columns: 1fr; gap: 34px; padding: 44px 0 56px; }
+        .row-item { grid-template-columns: 1fr; gap: 6px; }
+        .project-grid, .two-column-sections { grid-template-columns: 1fr; }
+        .two-column-sections { gap: 0; }
+        .two-column-sections section:first-child { border-bottom: 1px solid var(--color-border); }
     }
 </style>

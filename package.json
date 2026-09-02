@@ -2,17 +2,17 @@
   "name": "playeriv65.github.io",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.19.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "admin": "concurrently \"npm run dev\" \"node cms/server/server.js\" \"npm run dev --prefix cms/client\""
+    "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.18.1"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1"
+    "@fontsource-variable/inter": "^5.2.8",
+    "astro": "^7.2.10"
   }
 }

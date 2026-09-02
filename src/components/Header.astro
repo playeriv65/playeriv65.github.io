@@ -1,110 +1,38 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getLangFromUrl } from "../i18n/utils";
 import LanguagePicker from "./LanguagePicker.astro";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const navItems = [
-  { name: t("nav.home"), href: lang === "en" ? "/" : `/${lang}/` },
-  { name: t("nav.blog"), href: lang === "en" ? "/blog" : `/${lang}/blog` },
-  { name: t("nav.projects"), href: "#projects" },
-  { name: t("nav.about"), href: "#about" },
-];
+const home = lang === "en" ? "/" : "/zh/";
+const blog = lang === "en" ? "/blog/" : "/zh/blog/";
+const labels = lang === "en"
+    ? { education: "Education", research: "Research", publications: "Publications", projects: "Projects", blog: "Notes" }
+    : { education: "教育", research: "研究", publications: "论文", projects: "项目", blog: "随笔" };
 ---
 
-<header class="global-nav glass">
-  <div class="nav-content mx-auto">
-    <a href="/" class="nav-logo" aria-label="Home">
-      <span
-        style="font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em;"
-        >playeriv65</span
-      >
-    </a>
-
-    <nav class="nav-links">
-      <ul class="nav-list">
-        {
-          navItems.map((item) => (
-            <li class="nav-item">
-              <a href={item.href} class="nav-link">
-                {item.name}
-              </a>
-            </li>
-          ))
-        }
-        <li class="nav-item">
-          <LanguagePicker />
-        </li>
-      </ul>
-    </nav>
-  </div>
+<header>
+    <div class="nav-wrap">
+        <a class="name" href={home}>Zelin Li</a>
+        <nav aria-label="Primary navigation">
+            <a href={`${home}#education`}>{labels.education}</a>
+            <a href={`${home}#research`}>{labels.research}</a>
+            <a href={`${home}#publications`}>{labels.publications}</a>
+            <a href={`${home}#projects`}>{labels.projects}</a>
+            <a href={blog}>{labels.blog}</a>
+            <LanguagePicker />
+        </nav>
+    </div>
 </header>
 
 <style>
-  .global-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 44px;
-    z-index: 9999;
-    border-bottom: 1px solid var(--glass-border);
-  }
-
-  .nav-content {
-    max-width: 980px;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 22px;
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    color: var(--color-text);
-    opacity: 0.8;
-  }
-
-  .nav-logo:hover {
-    opacity: 1;
-  }
-
-  .nav-links {
-    height: 100%;
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .nav-list {
-    list-style: none;
-    display: flex;
-    height: 100%;
-    gap: 32px;
-    align-items: center;
-  }
-
-  .nav-item {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-link {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--color-text);
-    opacity: 0.8;
-    transition: opacity 0.3s var(--ease-apple);
-  }
-
-  @media (max-width: 833px) {
-    .nav-links {
-      display: none;
+    header { position: fixed; inset: 0 0 auto; z-index: 20; background: rgba(248, 250, 252, .92); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(12px); }
+    .nav-wrap { max-width: 960px; height: 58px; padding: 0 24px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .name { color: var(--color-heading); font-size: 1.02rem; font-weight: 760; letter-spacing: -.02em; white-space: nowrap; }
+    nav { display: flex; align-items: center; gap: 22px; }
+    nav > a { color: var(--color-text-muted); font-size: .86rem; font-weight: 620; }
+    nav > a:hover { color: var(--color-primary); text-decoration: none; }
+    @media (max-width: 760px) {
+        .nav-wrap { height: 54px; }
+        nav > a { display: none; }
     }
-  }
 </style>

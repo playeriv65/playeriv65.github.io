@@ -1,189 +1,25 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
-
-const currentYear = new Date().getFullYear();
+import { getLangFromUrl } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const note = lang === "en" ? "Computer Science student at the University of Minnesota." : "明尼苏达大学计算机科学本科生。";
 ---
 
-<footer class="global-footer">
-  <div class="footer-content mx-auto">
-    <div class="footer-divider"></div>
-
-    <div class="footer-main">
-      <div class="footer-branding">
-        <h2 class="footer-title">playeriv65</h2>
-        <p class="footer-subtitle">Design. Code. Create.</p>
-      </div>
-
-      <div class="footer-links">
-        <div class="link-column relative">
-          <h3 class="column-title">{t("footer.connect")}</h3>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/playeriv65"
-                target="_blank"
-                rel="noopener noreferrer">GitHub</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/zelin-li-65a461355"
-                target="_blank"
-                rel="noopener noreferrer">LinkedIn</a
-              >
-            </li>
-            <li><a href="mailto:zelin.li2025@outlook.com">Email</a></li>
-          </ul>
+<footer>
+    <div class="footer-wrap">
+        <div><strong>Zelin Li</strong><p>{note}</p></div>
+        <div class="links">
+            <a href="mailto:li004593@umn.edu">Email</a>
+            <a href="https://github.com/playeriv65" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/zelin-li-65a461355" target="_blank">LinkedIn</a>
         </div>
-        <div class="link-column">
-          <h3 class="column-title">{t("footer.projects")}</h3>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/playeriv65/todo"
-                target="_blank"
-                rel="noopener noreferrer">Offline-First Todo</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/playeriv65/ACG--Auto-Chronicle-Gaokao"
-                target="_blank"
-                rel="noopener noreferrer">ACG Engine</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/playeriv65/EasyLocomo"
-                target="_blank"
-                rel="noopener noreferrer">EasyLocomo</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-
-    <div class="footer-legal">
-      <div class="copyright">
-        {t("footer.legal.copyright")}
-      </div>
-      <div class="legal-links">
-        <a href="#">{t("footer.legal.privacy")}</a>
-        <span class="separator">|</span>
-        <a href="#">{t("footer.legal.terms")}</a>
-      </div>
-    </div>
-  </div>
 </footer>
 
 <style>
-  .global-footer {
-    background-color: var(--color-bg);
-    color: var(--color-text-muted);
-    font-size: 12px;
-    line-height: 1.33337;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    padding: 0 22px;
-    padding-bottom: 21px;
-    margin-top: 100px;
-  }
-
-  .footer-content {
-    max-width: 980px;
-  }
-
-  .footer-divider {
-    border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 20px;
-  }
-
-  .footer-main {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 30px;
-  }
-
-  .footer-title {
-    color: var(--color-text);
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    letter-spacing: -0.015em;
-  }
-
-  .footer-subtitle {
-    font-size: 14px;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 80px;
-  }
-
-  .column-title {
-    color: var(--color-text);
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    margin-bottom: 8px;
-  }
-
-  a {
-    color: var(--color-text-muted);
-    transition: color 0.3s var(--ease-apple), opacity 0.3s var(--ease-apple);
-  }
-
-  a:hover {
-    color: var(--color-primary);
-    text-decoration: none;
-    opacity: 1;
-  }
-
-  .footer-legal {
-    border-top: 1px solid var(--glass-border);
-    padding-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .legal-links {
-    display: flex;
-    align-items: center;
-  }
-
-  .separator {
-    margin: 0 10px;
-  }
-
-  @media (max-width: 833px) {
-    .footer-main {
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .footer-links {
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .footer-legal {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-  }
+    footer { border-top: 1px solid var(--color-border); padding: 30px 24px 42px; }
+    .footer-wrap { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; color: var(--color-text-muted); font-size: .86rem; }
+    strong { color: var(--color-heading); }
+    p { margin-top: 3px; }
+    .links { display: flex; gap: 20px; }
+    @media (max-width: 600px) { .footer-wrap { flex-direction: column; } }
 </style>

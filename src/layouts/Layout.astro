@@ -7,7 +7,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Zelin Li | Personal Website" } = Astro.props;
+const { title, description = "Zelin Li is a computer science student and researcher at the University of Minnesota working on efficient LLM systems." } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -19,33 +19,20 @@ const lang = getLangFromUrl(Astro.url);
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#000000" />
+		<meta name="theme-color" content="#f8fafc" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" content="https://playeriv65.com/og.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content="https://playeriv65.com/og.png" />
 		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
 
-		<script>
-			const observerOptions = {
-				root: null,
-				rootMargin: "0px",
-				threshold: 0.1,
-			};
-
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add("appear");
-						observer.unobserve(entry.target);
-					}
-				});
-			}, observerOptions);
-
-			document.addEventListener("DOMContentLoaded", () => {
-				// Animate elements with reveal-on-scroll class using observer
-				const elements = document.querySelectorAll(".reveal-on-scroll");
-				elements.forEach((el) => observer.observe(el));
-			});
-		</script>
 	</body>
 </html>
