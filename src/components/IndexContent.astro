@@ -9,8 +9,8 @@ const content = {
         links: { cv: "CV", email: "Email", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "Education", research: "Research Experience", publications: "Publications & Preprints", projects: "Selected Projects", honors: "Honors & Awards", skills: "Technical Skills" },
         education: [
-            { school: "University of Minnesota, Twin Cities", degree: "B.S. in Computer Science", date: "2025–2027", detail: "GPA: 4.0/4.0" },
-            { school: "Beijing University of Posts and Telecommunications", degree: "Artificial Intelligence", date: "2023–2025", detail: "GPA: 3.85/4.0 · Rank: 1/180" },
+            { school: "University of Minnesota, Twin Cities", degree: "B.S. in Computer Science", date: "2025–2027", detail: "GPA: 4.0/4.0", logo: "/schools/umn-block-m.svg" },
+            { school: "Beijing University of Posts and Telecommunications", degree: "Artificial Intelligence", date: "2023–2025", detail: "GPA: 3.85/4.0 · Rank: 1/180", logo: "/schools/bupt-logo.png" },
         ],
         research: [
             { role: "Research Assistant", place: "University of Minnesota · Prof. Caiwen Ding", date: "Apr 2026–Present", bullets: ["Developing inference-native execution methods for zeroth-order optimization in LLM systems.", "Studying structured search spaces, mini-batch noise, and efficient candidate-state evaluation."] },
@@ -35,8 +35,8 @@ const content = {
         links: { cv: "学术简历", email: "邮箱", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "教育经历", research: "研究经历", publications: "论文与预印本", projects: "精选项目", honors: "荣誉与奖项", skills: "技术能力" },
         education: [
-            { school: "明尼苏达大学双城分校", degree: "计算机科学学士", date: "2025–2027", detail: "GPA：4.0/4.0" },
-            { school: "北京邮电大学", degree: "人工智能", date: "2023–2025", detail: "GPA：3.85/4.0 · 专业排名：1/180" },
+            { school: "明尼苏达大学双城分校", degree: "计算机科学学士", date: "2025–2027", detail: "GPA：4.0/4.0", logo: "/schools/umn-block-m.svg" },
+            { school: "北京邮电大学", degree: "人工智能", date: "2023–2025", detail: "GPA：3.85/4.0 · 专业排名：1/180", logo: "/schools/bupt-logo.png" },
         ],
         research: [
             { role: "研究助理", place: "明尼苏达大学 · 丁才文教授", date: "2026 年 4 月至今", bullets: ["研究面向大语言模型零阶优化的推理原生执行方法。", "研究结构化搜索空间、小批量噪声与高效候选状态评估。"] },
@@ -76,7 +76,7 @@ const c = content[lang];
 
     <section id="education">
         <h2>{c.sections.education}</h2>
-        <div class="stack">{c.education.map((item) => <article class="row-item"><div><h3>{item.school}</h3><p>{item.degree}</p><p class="detail">{item.detail}</p></div><time>{item.date}</time></article>)}</div>
+        <div class="stack">{c.education.map((item) => <article class="row-item"><div class="school-info"><img class="school-logo" src={item.logo} alt="" width="48" height="48" loading="lazy" /><div><h3>{item.school}</h3><p>{item.degree}</p><p class="detail">{item.detail}</p></div></div><time>{item.date}</time></article>)}</div>
     </section>
 
     <section id="research">
@@ -116,6 +116,8 @@ const c = content[lang];
     section h2::before { content: "0" counter(section); color: var(--color-primary); font: 720 1.65rem/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: -.06em; min-width: 2.2rem; }
     .stack { display: grid; gap: 30px; }
     .row-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
+    .school-info { display: flex; align-items: flex-start; gap: 16px; }
+    .school-logo { width: 48px; height: 48px; flex: 0 0 48px; object-fit: contain; }
     h3 { color: var(--color-heading); font-size: 1.02rem; line-height: 1.4; }
     .row-item p, .publication-list p { color: var(--color-text); margin-top: 3px; }
     .detail { color: var(--color-text-muted) !important; font-size: .92rem; }
