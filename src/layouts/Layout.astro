@@ -9,6 +9,29 @@ interface Props {
 
 const { title, description = "Zelin Li is a computer science student and researcher at the University of Minnesota working on efficient LLM systems." } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const site = Astro.site!;
+const canonical = new URL(lang === "zh" ? "/zh/" : "/", site).href;
+const profile = {
+	"@context": "https://schema.org",
+	"@type": "ProfilePage",
+	"@id": `${canonical}#profile`,
+	url: canonical,
+	name: title,
+	description,
+	inLanguage: lang === "zh" ? "zh-CN" : "en",
+	mainEntity: {
+		"@type": "Person",
+		"@id": new URL("/#person", site).href,
+		name: "Zelin Li",
+		alternateName: ["李泽林", "playeriv65"],
+		url: site.href,
+		image: new URL("/profile.webp", site).href,
+		jobTitle: "Computer Science Student and Research Assistant",
+		affiliation: { "@type": "CollegeOrUniversity", name: "University of Minnesota, Twin Cities" },
+		knowsAbout: ["Large Language Model Systems", "Zeroth-Order Optimization", "LLM Inference"],
+		sameAs: ["https://github.com/playeriv65", "https://www.linkedin.com/in/zelin-li-65a461355"],
+	},
+};
 ---
 
 <!doctype html>
@@ -16,6 +39,11 @@ const lang = getLangFromUrl(Astro.url);
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
+		<meta name="author" content="Zelin Li" />
+		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="en" href={new URL("/", site).href} />
+		<link rel="alternate" hreflang="zh-CN" href={new URL("/zh/", site).href} />
+		<link rel="alternate" hreflang="x-default" href={new URL("/", site).href} />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
 		<meta name="generator" content={Astro.generator} />
@@ -23,12 +51,18 @@ const lang = getLangFromUrl(Astro.url);
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content="Zelin Li" />
+		<meta property="og:locale" content={lang === "zh" ? "zh_CN" : "en_US"} />
+		<meta property="og:locale:alternate" content={lang === "zh" ? "en_US" : "zh_CN"} />
 		<meta property="og:image" content="https://playeriv65.com/og.png" />
+		<meta property="og:image:alt" content="Zelin Li — Computer Science, University of Minnesota" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="https://playeriv65.com/og.png" />
+		<meta name="twitter:image:alt" content="Zelin Li — Computer Science, University of Minnesota" />
+		<script type="application/ld+json" set:html={JSON.stringify(profile).replace(/</g, "\\u003c")} />
 		<title>{title}</title>
 	</head>
 	<body>
