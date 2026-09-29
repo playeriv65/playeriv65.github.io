@@ -5,7 +5,8 @@ const lang = getLangFromUrl(Astro.url);
 const content = {
     en: {
         title: "Zelin Li",
-        subtitle: "Computer Science student at the University of Minnesota, working on machine learning optimization, efficient LLM systems, and algorithm–system co-design.",
+        affiliation: "CS at the University of Minnesota",
+        researchFocus: "ML optimization · Efficient LLM systems · Algorithm–system co-design",
         links: { cv: "CV", email: "Email", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "Education", research: "Research Experience", publications: "Publications & Preprints", projects: "Selected Projects", honors: "Honors & Awards", skills: "Technical Skills" },
         education: [
@@ -31,7 +32,8 @@ const content = {
     },
     zh: {
         title: "李泽林",
-        subtitle: "明尼苏达大学计算机科学本科生，研究机器学习优化、高效大语言模型系统与算法—系统协同设计。",
+        affiliation: "明尼苏达大学计算机科学",
+        researchFocus: "机器学习优化 · 高效大语言模型系统 · 算法—系统协同设计",
         links: { cv: "学术简历", email: "邮箱", github: "GitHub", linkedin: "LinkedIn" },
         sections: { education: "教育经历", research: "研究经历", publications: "论文与预印本", projects: "精选项目", honors: "荣誉与奖项", skills: "技术能力" },
         education: [
@@ -63,7 +65,8 @@ const c = content[lang];
     <section class="hero" id="about">
         <div class="hero-main">
             <h1>{c.title}</h1>
-            <p class="subtitle">{c.subtitle}</p>
+            <p class="affiliation">{c.affiliation}</p>
+            <p class="research-focus">{c.researchFocus}</p>
             <div class="contact-links" aria-label="Contact links">
                 <a href="/resume.pdf" target="_blank">{c.links.cv}</a>
                 <a href="mailto:li004593@umn.edu">{c.links.email}</a>
@@ -104,7 +107,8 @@ const c = content[lang];
     main { max-width: 960px; margin: 0 auto; padding: 96px 24px 72px; counter-reset: section; }
     .hero { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 72px; align-items: center; padding: 64px 0 72px; border-bottom: 1px solid var(--color-border); }
     h1 { color: var(--color-heading); font-size: clamp(3.2rem, 8vw, 5.5rem); line-height: .98; font-weight: 780; letter-spacing: -.055em; margin-bottom: 24px; }
-    .subtitle { max-width: 620px; font-size: clamp(1.3rem, 3vw, 1.72rem); line-height: 1.35; color: var(--color-text); letter-spacing: -.018em; }
+    .affiliation { max-width: 620px; color: var(--color-heading); font-size: clamp(1.35rem, 2.6vw, 1.68rem); font-weight: 560; line-height: 1.28; letter-spacing: -.022em; }
+    .research-focus { max-width: 660px; margin-top: 13px; color: var(--color-text); font-size: clamp(.92rem, 1.4vw, 1.02rem); font-weight: 520; line-height: 1.5; letter-spacing: -.008em; }
     .contact-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
     .contact-links a { color: var(--color-heading); background: rgba(255, 255, 255, .72); border: 1px solid var(--color-border); border-radius: 999px; padding: 9px 15px; font-weight: 650; transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease; }
     .contact-links a:hover { color: var(--color-primary); background: white; border-color: #9fb4d2; text-decoration: none; transform: translateY(-1px); }
