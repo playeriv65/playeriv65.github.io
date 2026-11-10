@@ -49,7 +49,7 @@ Long-Horizon LLM Memory Benchmark
 Honors & Awards
 National Scholarship, Ministry of Education of China (5/470)
 2024
-Silver Medal, International Collegiate Programming Contest (ICPC), Asia Shenyang Regional (84/399)
+Silver Medal, International Collegiate Programming Contest (ICPC), Asia Shenyang Regional (39/300)
 2024
 Bronze Medal, CCPC Harbin
 2024
