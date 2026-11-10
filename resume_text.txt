@@ -53,7 +53,7 @@ Silver Medal, International Collegiate Programming Contest (ICPC), Asia Shenyang
 2024
 Bronze Medal, CCPC Harbin
 2024
-Bronze Medal, CCPC Beijing
+Bronze Medal, Beijing Collegiate Programming Contest
 2024
 First Prize, National Olympiad in Informatics in Provinces (NOIP), Shanxi
 2021
